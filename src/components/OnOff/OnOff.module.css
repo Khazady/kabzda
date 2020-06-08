@@ -1,0 +1,37 @@
+.false {
+    background-color: red;
+}
+
+.true {
+    background-color: green;
+}
+
+.inactive {
+    background-color: white;
+}
+
+.on {
+    width: 30px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 2px;
+}
+
+.off {
+    width: 30px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    margin-left: 2px;
+    padding: 2px;
+}
+
+.round {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    display: inline-block;
+    margin-left: 5px;
+}
