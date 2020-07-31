@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import classes from "./OnOff.module.css";
 
 type OnOffPropsType = {
@@ -6,7 +6,7 @@ type OnOffPropsType = {
     onClick: (value: boolean) => void
 }
 
-function OnOff(props: OnOffPropsType) {
+export function OnOff(props: OnOffPropsType) {
     return (
       <div>                                                                         {/*если on тру, то класс тру, нет, то инактив*/}
           <div onClick={ () => { props.onClick(true) /*меняем значение on*/ }} className={`${classes.on} ${props.value ? classes.true : classes.inactive}`}>On</div>
@@ -15,5 +15,3 @@ function OnOff(props: OnOffPropsType) {
       </div>
     )
 }
-
-export default OnOff;
