@@ -13,7 +13,7 @@ type AccordionPropsType = {
     onDoubleClick: (value: any) => void
 }
 
-export function Accordion(props: AccordionPropsType) {
+export function AccordionSecret(props: AccordionPropsType) {
     return (
       <div>
           <AccordionTitle title={props.titleValue} collapsed={props.collapsed} onClick={() => props.onClick(!props.collapsed)}/>
@@ -21,6 +21,8 @@ export function Accordion(props: AccordionPropsType) {
       </div>
     )
 }
+
+export const Accordion = React.memo(AccordionSecret);
 
 
 type AccordionTitlePropsType = {
