@@ -56,7 +56,7 @@ export function Select(props: SelectPropsType) {
                 tabIndex={0}
                 onKeyUp={onKeyUp}
                 onClick={toggleItems}>
-              {selectedItem && selectedItem.title}
+              {selectedItem && selectedItem.title} 
           </span>
           {
               active &&
