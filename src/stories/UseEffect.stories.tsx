@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from "react"
+import React, {useEffect, useState} from "react"
 
 export default {
     title: "UseEffect demo"
@@ -11,7 +11,7 @@ export const SimpleExample = () => {
 
     console.log("Simple Example rendered");
 
-    useEffect( () => {
+    useEffect(() => {
         console.log("useEffect every time")
         //грязные вещи, которые запрещены в компонентах и редьюсерах, создают мусор во время своей жизнедеятельности, поэтому нужен useEffect
         //axios.getUsers().then('')
@@ -19,19 +19,25 @@ export const SimpleExample = () => {
         //indexedDB
         //document.getElementById
         //document.title = "User"
-      })
+    })
 
-    useEffect( () => {
+    useEffect(() => {
         console.log("useEffect only 1 time after render page(componentDidMount)")
-      }, [])
+    }, [])
 
-    useEffect( () => {
+    useEffect(() => {
         console.log("useEffect 1st render and after counter changes")
-      }, [counter])
+    }, [counter])
 
     return <>
-        <button onClick={ ()=>{setCounter(state => state + 1)} }>+</button>
-        <button onClick={ ()=>{setFake(state => state + 1)} }>+</button>
+        <button onClick={() => {
+            setCounter(state => state + 1)
+        }}>+
+        </button>
+        <button onClick={() => {
+            setFake(state => state + 1)
+        }}>+
+        </button>
         {fake}
         Hello, {counter}
     </>
@@ -43,17 +49,23 @@ export const SetTimeOutExample = () => {
 
     console.log("SetTimeOut rendered");
 
-    useEffect( () => {
+    useEffect(() => {
 
-        setTimeout( () => {
+        setTimeout(() => {
             console.log("setTimeout");
             document.title = counter.toString()
         }, 1000)
-      }, [counter])
+    }, [counter])
 
     return <>
-        <button onClick={ ()=>{setCounter(state => state + 1)} }>+</button>
-        <button onClick={ ()=>{setFake(state => state + 1)} }>+</button>
+        <button onClick={() => {
+            setCounter(state => state + 1)
+        }}>+
+        </button>
+        <button onClick={() => {
+            setFake(state => state + 1)
+        }}>+
+        </button>
         {fake}
         Hello, {counter}
     </>
@@ -64,15 +76,54 @@ export const SetInterval = () => {
 
     console.log("SetInterval rendered");
 
-    useEffect( () => {
+    useEffect(() => {
 
-        setInterval( () => {
+        let i = setInterval(() => {
             console.log("tick" + 1)
-            setCounter( (state) => state + 1)
+            setCounter((state) => state + 1)
         }, 1000)
+        return () => clearInterval(i)
     }, [])
 
     return <>
         Hello,counter: {counter}
+    </>
+}
+
+export const ResetEffectExample = () => {
+    const [counter, setCounter] = useState(1)
+
+    console.log("Component rendered with " + counter + " actual value")
+
+    useEffect(()=>{
+        console.log("Effect occurred " + counter + " new value after birth")
+
+        return () => {
+            console.log("RESET EFFECT " + counter + " old value before dying")
+        }
+    }, [counter])
+
+    return <>
+        Hello, counter: {counter} <button onClick={ ()=>{ setCounter(counter+1) }}>+</button>
+    </>
+}
+
+export const KeysTrackerExample = () => {
+    const [text, setText] = useState("")
+
+    console.log("Component rendered with " + text)
+
+    useEffect(()=>{
+        const handler = (e: KeyboardEvent)=> {
+            console.log(e.key)
+            setText(text + e.key)
+        };
+
+        window.document.addEventListener('keypress', handler)
+        return () => window.removeEventListener('keypress', handler)
+    }, [text])
+
+    return <>
+        Typed text: {text}
     </>
 }
