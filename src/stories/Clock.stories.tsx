@@ -1,7 +1,7 @@
-import React, {useState, useMemo, useEffect} from "react"
+import React, {useState, useEffect} from "react"
 
 export default {
-    title: "Clock demo"
+    title: "My clock demo"
 }
 
 export const Clock = () => {
@@ -16,7 +16,7 @@ export const Clock = () => {
 
     let hours = counter.getHours();
     let minutes = counter.getMinutes();
-    let seconds = counter.getSSeconds();
+    let seconds = counter.getSeconds();
 
     return <>
         {hours} : {minutes} : {seconds}
